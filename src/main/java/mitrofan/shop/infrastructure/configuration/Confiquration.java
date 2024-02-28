@@ -5,6 +5,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
 public class Confiquration {
@@ -18,5 +20,10 @@ public class Confiquration {
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
+    }
+
+    @Bean
+    public Validator validator() {
+        return new LocalValidatorFactoryBean();
     }
 }

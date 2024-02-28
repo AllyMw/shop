@@ -15,19 +15,23 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "login")
     private String login;
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "last_name")
-    private String lastName;
+
+    @Embedded
+    private FullName fullName;
+
     @Column(name = "age")
     private int age;
+
     @OneToOne
     private ShoppingList shoppingList;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<PurchaseHistory> purchaseHistoryList;
 }

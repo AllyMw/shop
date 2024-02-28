@@ -1,5 +1,6 @@
 package mitrofan.shop.presentation.user.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import mitrofan.shop.application.service.ShoppingListService;
 import mitrofan.shop.application.service.UserService;
@@ -10,6 +11,7 @@ import mitrofan.shop.presentation.user.command.CreateUserCommand;
 import mitrofan.shop.presentation.user.command.UpdateUserCommand;
 import mitrofan.shop.presentation.user.query.UserQuery;
 import org.modelmapper.ModelMapper;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
+@Validated
 class UserController {
 
     private UserService userService;
@@ -37,7 +40,7 @@ class UserController {
     }
 
     @PostMapping("/create")
-    public UserQuery create(@RequestBody CreateUserCommand command) {
+    public UserQuery create(@RequestBody @Valid CreateUserCommand command) {
         User user = userService.addNewUser(command);
         UserQuery userQueryResponse = modelMapper.map(user, UserQuery.class);
         return userQueryResponse;
@@ -66,5 +69,14 @@ class UserController {
         shoppingListQuery.setShoppingList(cart);
         shoppingListQuery.setLogin(login);
         return shoppingListQuery;
+    }
+    @PostMapping("/cart/buy")
+    public void buy(@RequestParam String login) {
+        shoppingListService.buy(login);
+    }
+
+    @DeleteMapping("/cart/delete")
+    public void deleteFromCart(@RequestParam String login, @RequestParam Long productId) {
+        shoppingListService.deleteFromCart(login, productId);
     }
 }

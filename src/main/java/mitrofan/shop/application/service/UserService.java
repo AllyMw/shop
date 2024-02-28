@@ -1,5 +1,6 @@
 package mitrofan.shop.application.service;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import mitrofan.shop.domain.entity.Category;
 import mitrofan.shop.domain.entity.Product;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class UserService {
     private UserRepository userRepository;
     private ModelMapper modelMapper;
