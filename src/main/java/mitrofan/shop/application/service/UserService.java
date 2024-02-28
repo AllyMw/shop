@@ -39,8 +39,7 @@ public class UserService {
     public User update(Long id, User userFromCommand) {
         var user = getById(id);
 
-        if (!user.getFirstName().equals(userFromCommand.getFirstName()))
-            user.setFirstName(userFromCommand.getFirstName());
+
 
         User saved = userRepository.save(user);
 
