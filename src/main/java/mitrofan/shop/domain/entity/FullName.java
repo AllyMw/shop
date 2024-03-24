@@ -1,15 +1,15 @@
 package mitrofan.shop.domain.entity;
 
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.MappedSuperclass;
-import lombok.AllArgsConstructor;
-import lombok.Value;
+import lombok.*;
 
-@Value
-@AllArgsConstructor
-@MappedSuperclass
-public class FullName {
-
-    private String firstName;
-
-    private String lastName;
-}
+//@Getter
+//@Setter
+//@Embeddable
+//public class FullName {
+//
+//    private String firstName;
+//
+//    private String lastName;
+//}

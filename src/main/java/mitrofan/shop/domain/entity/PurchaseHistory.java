@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Table(name = "purchase_history")
 @Builder
 @Entity
+@ToString(exclude = "user")
 public class PurchaseHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -33,7 +33,7 @@ public class CategoryController {
         return modelMapper.map(categoryService.getCategoriesByTitle(title), CategoryQuery.class);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/add")
     public CategoryQuery createNewCategories(@RequestBody CreateCategoryCommand categoriesCommand) {
         Category categoriesFromCommand = new Category();
         categoriesFromCommand.setTitle(categoriesCommand.getTitle());

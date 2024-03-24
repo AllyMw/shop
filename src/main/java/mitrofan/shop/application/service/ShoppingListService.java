@@ -13,10 +13,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ShoppingListService {
-    private UserService userService;
-    private ProductService productService;
-    private ShoppingListRepository shoppingListRepository;
-    private PurchaseHistoryService purchaseHistoryService;
+    private final UserService userService;
+    private final ProductService productService;
+    private final ShoppingListRepository shoppingListRepository;
+    private final PurchaseHistoryService purchaseHistoryService;
 
     public ShoppingList addToCart(String login, Long productId) {
         User user = userService.getByLogin(login);
@@ -24,6 +24,8 @@ public class ShoppingListService {
         ShoppingList cart = user.getShoppingList();
         if (cart == null) {
             cart = new ShoppingList();
+            cart.setProducts(new ArrayList<>());
+            cart.setUser(user);
         }
         List<Product> list = cart.getProducts();
         if (!list.contains(product)) {
@@ -40,7 +42,8 @@ public class ShoppingListService {
         if (cart != null) {
             purchaseHistoryService.create(cart, user);
 
-            cart.setProducts(new ArrayList<>());;
+            cart.setProducts(new ArrayList<>());
+            ;
             user.setShoppingList(cart);
             userService.update(user.getId(), user);
         } else {
@@ -61,3 +64,4 @@ public class ShoppingListService {
         shoppingListRepository.save(cart);
     }
 }
+

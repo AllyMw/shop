@@ -33,7 +33,10 @@ public class ProductController {
         if (products == null) {
             return null;
         }
-
         return modelMapper.map(products, ProductQuery.class);
+    }
+    @DeleteMapping("/delete/{productId}")
+    public void deleteProduct(@PathVariable Long productId){
+        productService.deleteProductById(productId);
     }
 }

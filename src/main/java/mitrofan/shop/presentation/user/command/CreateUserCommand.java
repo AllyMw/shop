@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 public class CreateUserCommand {
     private String login;
-    private String firstName;
-    private String lastName;
-    private int age;
+    private String email;
+    private String password;
+
 }

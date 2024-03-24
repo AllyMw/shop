@@ -1,6 +1,9 @@
 package mitrofan.shop.domain.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 import mitrofan.shop.converter.CategoryConverter;
@@ -14,7 +17,7 @@ import mitrofan.shop.converter.CategoryConverter;
 @Table(name = "products")
 @Builder
 @Entity
-@ToString
+@ToString(exclude = "category")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +30,7 @@ public class Product {
     private String description;
     @ManyToOne(fetch = FetchType.EAGER)
     @Convert(converter = CategoryConverter.class)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     private Category category;
 
 }
